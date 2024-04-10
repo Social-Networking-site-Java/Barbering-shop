@@ -38,7 +38,7 @@ public class BarbaShop {
                 addVIPCustomer();
                 break;
             default:
-                //addOrdinaryCustomer(event);
+                addOrdinaryCustomer(event);
         }
     }
 
@@ -96,6 +96,22 @@ public class BarbaShop {
 
             //waitingQueue.addLast("VIP" + (waitingQueue.size() + 1));
             waitingQueue.addFirst("VIP" + (waitingQueue.size() + 1));
+        }
+    }
+
+
+
+    public void addOrdinaryCustomer(int event) {
+        if (currentCustomer == null && waitingQueue.size() < CHAIR_COUNT) {
+            currentCustomer = "ORD" + (waitingQueue.size() + 1);
+            return;
+        }
+        //  if (waitingQueue.size() < CHAIR_COUNT) {
+        if (waitingQueue.size() < CHAIR_COUNT) {
+            // waitingQueue.remove("ORD" + (waitingQueue.size() + 1));
+            waitingQueue.addLast("ORD" + (waitingQueue.size() + 1));
+        } else {
+            //System.out.println("+- " + "ORD" + (event - 1 + 1) + " (Customer left)");
         }
     }
 }
