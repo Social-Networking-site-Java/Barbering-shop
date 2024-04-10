@@ -4,8 +4,8 @@ import java.util.LinkedList;
 
 public class BarbaShop {
 
-    final LinkedList<String> waitingQueue = new LinkedList<>();
-    String currentCustomer = null;
+    public final LinkedList<String> waitingQueue = new LinkedList<>();
+    public String currentCustomer = null;
 
     private static final int CHAIR_COUNT = 5;
 
@@ -75,9 +75,7 @@ public class BarbaShop {
          * is true, it adds the VIP customer to the beginning
          * of the waiting queue*/
         if (waitingQueue.isEmpty() || waitingQueue.getFirst().startsWith("VIP")) {
-            //waitingQueue.addFirst("VIP" + (waitingQueue.size() + 1));
-            waitingQueue.addFirst("VIP" + (waitingQueue.size()));
-
+            waitingQueue.addFirst("VIP" + (waitingQueue.size() + 1));
         } else {
 
             /** If neither of the above conditions is met,
@@ -113,5 +111,22 @@ public class BarbaShop {
         } else {
             //System.out.println("+- " + "ORD" + (event - 1 + 1) + " (Customer left)");
         }
+    }
+
+
+
+    public static void welcomeScreen(){
+
+        System.out.println("\n");
+        System.out.println("    ========================================================================");
+        System.out.println("    !                Welcome to Executive Barbering Shop                   !");
+        System.out.println("    ________________________________________________________________________");
+        System.out.println("    !                                                                      !");
+        System.out.println("    !           Press space to trigger events. Press any other key to exi  !");
+        System.out.println("    !                                                                      !");
+        System.out.println("    !                                                                      !");
+        System.out.println("    ========================================================================");
+
+
     }
 }
