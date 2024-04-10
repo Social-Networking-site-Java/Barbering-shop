@@ -38,7 +38,7 @@ public class BarbaShop {
                 addVIPCustomer();
                 break;
             default:
-                addOrdinaryCustomer(event);
+                //addOrdinaryCustomer(event);
         }
     }
 
