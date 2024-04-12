@@ -25,3 +25,28 @@ upon a new simulation, the program will display a new line following this format
 x ---> ( event ) [ sitting order of clients in the shop ]
 
 If the user presses any other character different from the space ' ' , Your program will end.
+
+
+
+
+
+screenshot of the first 20 simulation
+
+first screenshot
+
+![image](https://github.com/Social-Networking-site-Java/Barbering-shop/assets/59591232/2e914f5a-dbc2-4c53-a20b-dc66b845b0a6)
+
+
+
+second screenshot
+
+![image](https://github.com/Social-Networking-site-Java/Barbering-shop/assets/59591232/ce156071-3f6f-4929-bb93-404d6670ba9c)
+
+
+
+Third screenshot
+
+![image](https://github.com/Social-Networking-site-Java/Barbering-shop/assets/59591232/8f0288f4-fe4a-49dd-bda6-9a0186d9a3a7)
+
+
+
