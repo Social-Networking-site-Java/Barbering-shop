@@ -17,10 +17,8 @@ public class BarbaShop {
     public String getEventDescription(int event) {
         return switch (event) {
             case 0 ->  "-- " + currentCustomer;
-            //  case 1 ->  "++ VIP" + (waitingQueue.size() + 1);
             case 1 ->  "++ VIP" + (waitingQueue.size());
             case 2, 3 -> "++ ORD" + (waitingQueue.size());
-            //  case 2, 3 -> "++ ORD" + (waitingQueue.size() + 1);
             default -> "";
         };
     }
@@ -32,84 +30,72 @@ public class BarbaShop {
     public void handleEvent(int event) {
         switch (event) {
             case 0:
+                // Serve the current customer
                 serveCustomer();
                 break;
             case 1:
+                // Add a VIP customer to the waiting queue
                 addVIPCustomer();
                 break;
             default:
-                addOrdinaryCustomer(event);
+                // Add an ordinary customer to the waiting queue
+                addOrdinaryCustomer();
         }
     }
 
     //checks if there is a current customer.
     public void serveCustomer() {
+        // it means there's no one to serve, so the method returns early without doing anything.
         if (currentCustomer == null) {
             return;
         }
         // This line sets the currentCustomer to null,
+        // indicating that the current customer has been served
+        // and is no longer in the barber shop.
         currentCustomer = null;
 
-        /** This conditional statement checks if the waiting queue is not empty.
+        /* This conditional statement checks if the waiting queue is not empty.
          *  If it's not empty, it removes and returns the first
          *  customer from the waiting queue using the [ pollFirst() method ]
-         *  and assigns it to the currentCustomer. */
+         *  and assigns it to the currentCustomer. **/
         if (!waitingQueue.isEmpty()) {
             currentCustomer = waitingQueue.pollFirst();
         }
     }
 
 
-    //adds a VIP customer to the waiting queue.
-    public void addVIPCustomer() {
 
-        /** If both conditions are true, it assigns the currentCustomer
-         * to be "VIP1" and returns, indicating that the VIP customer has been added */
+    // adding a vip customer
+    public void addVIPCustomer() {
+        // Check if there is no current customer and the waiting queue is empty
         if (currentCustomer == null && waitingQueue.isEmpty()) {
-            currentCustomer = "VIP" + (1);
+            // If both conditions are true, assign the currentCustomer as the first VIP
+            currentCustomer = "VIP1";
             return;
         }
 
-        /** Checks if the waiting queue is empty or the first customer
-         * in the waiting queue is a VIP customer. If either condition
-         * is true, it adds the VIP customer to the beginning
-         * of the waiting queue*/
-        if (waitingQueue.isEmpty() || waitingQueue.getFirst().startsWith("VIP")) {
-            waitingQueue.addFirst("VIP" + (waitingQueue.size() + 1));
-        } else {
-
-            /** If neither of the above conditions is met,
-             * the method iterates through the waiting queue
-             * to find the index where the first non-VIP customer is encountered.
-             * It then inserts the new VIP customer at that index.*/
-            int index = 1;
-            for (String customer : waitingQueue) {
-                if (customer.startsWith("VIP")) {
-                    waitingQueue.add(index, "VIP" + (waitingQueue.size() + 1));
-                    return;
-                }
-                index++;
+        // Iterate through the waiting queue to find the index of the first non-VIP customer
+        int index = 0;
+        for (String customer : waitingQueue) {
+            if (!customer.startsWith("VIP")) {
+                break;
             }
-
-
-            //waitingQueue.addLast("VIP" + (waitingQueue.size() + 1));
-            waitingQueue.addFirst("VIP" + (waitingQueue.size() + 1));
+            index++;
         }
+
+        // Insert the new VIP customer at the index of the first non-VIP customer
+        waitingQueue.add(index, "VIP" + (waitingQueue.size() + 1));
     }
 
-
-
-    public void addOrdinaryCustomer(int event) {
-        if (currentCustomer == null && waitingQueue.size() < CHAIR_COUNT) {
+    // adding ORD customer
+    public void addOrdinaryCustomer() {
+        // Check if there is space in the waiting queue or if there is no current customer
+        if (waitingQueue.size() < CHAIR_COUNT && currentCustomer == null) {
+            // If there's space and no current customer, make the current customer the new ordinary customer
             currentCustomer = "ORD" + (waitingQueue.size() + 1);
-            return;
-        }
-        //  if (waitingQueue.size() < CHAIR_COUNT) {
-        if (waitingQueue.size() < CHAIR_COUNT) {
-            // waitingQueue.remove("ORD" + (waitingQueue.size() + 1));
+        } else if (waitingQueue.size() < CHAIR_COUNT) {
+            // If there's space in the waiting queue, add the new ordinary customer to the end of the queue
             waitingQueue.addLast("ORD" + (waitingQueue.size() + 1));
-        } else {
-            //System.out.println("+- " + "ORD" + (event - 1 + 1) + " (Customer left)");
         }
     }
 
@@ -117,7 +103,7 @@ public class BarbaShop {
 
     public static void welcomeScreen(){
 
-        System.out.println("\n");
+        System.out.println();
         System.out.println("    ========================================================================");
         System.out.println("    !                Welcome to Executive Barbering Shop                   !");
         System.out.println("    ________________________________________________________________________");
@@ -126,6 +112,7 @@ public class BarbaShop {
         System.out.println("    !                                                                      !");
         System.out.println("    !                                                                      !");
         System.out.println("    ========================================================================");
+        System.out.println();
 
 
     }
